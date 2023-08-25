@@ -1,6 +1,6 @@
-let quiz = "1) Which gland is known as the master gland?\n\na) Thyroid gland\nb) Adrenal gland\nc) Pituitary gland\nd) Pancreas\n\nAnswer: c) Pituitary gland\n\n2) Which hormone is responsible for regulating blood sugar levels?\n\na) Insulin\nb) Estrogen\nc) Testosterone\nd) Growth hormone\n\nAnswer: a) Insulin\n\n3) Which gland is responsible for controlling the body's metabolism?\n\na) Thyroid gland\nb) Pineal gland\nc) Parathyroid gland\nd) Ovaries\n\nAnswer: a) Thyroid gland";
+//let quiz = "1) Which gland is known as the master gland?\n\na) Thyroid gland\nb) Adrenal gland\nc) Pituitary gland\nd) Pancreas\n\nAnswer: c) Pituitary gland\n\n2) Which hormone is responsible for regulating blood sugar levels?\n\na) Insulin\nb) Estrogen\nc) Testosterone\nd) Growth hormone\n\nAnswer: a) Insulin\n\n3) Which gland is responsible for controlling the body's metabolism?\n\na) Thyroid gland\nb) Pineal gland\nc) Parathyroid gland\nd) Ovaries\n\nAnswer: a) Thyroid gland";
 let QuestionScript = ''; // data that will be downloaded as .txt file
-//let quiz = '';
+let quiz = '';
 let questions = []; //Data structure to hold objects containing question, answer options, selected option and correct option 
 let time;
 let totalSecondsToCountDown = 0;
@@ -21,7 +21,7 @@ let msg = ''; // Contains name, score, answer script
 
 function buildQuestions() {
     alert("Preparing quiz");
-    //quiz = sessionStorage.getItem('fetchedQuiz');
+    quiz = sessionStorage.getItem('fetchedQuiz');
     noqs = sessionStorage.getItem('noqs');
     topic = sessionStorage.getItem('topic');
     time = sessionStorage.getItem('time');
@@ -359,6 +359,7 @@ function pauseResume() {
 }
 function sendByMail() {
     mailid = sessionStorage.getItem('mailID');
+    msg=sessionStorage.getItem('msg');
 
     var xhr = new XMLHttpRequest();// Create a new XMLHttpRequest object
     xhr.open("POST", "http://localhost:3000/mail/");
@@ -369,6 +370,7 @@ function sendByMail() {
         if (xhr.status == 200) {
             // The request was successful
             console.log(xhr.responseText);
+            alert(`Mail sent to ${mailid}`);
         } else {
             // The request failed
             console.log("Error: " + xhr.status);

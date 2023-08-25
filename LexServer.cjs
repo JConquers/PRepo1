@@ -10,7 +10,7 @@ const app = express();
 app.use(express.json());
 
 app.use((req, res, next) => { //---------------------------------------> dealing with the no 'Acess-control-allow-origin in header' error in browser'
-  res.setHeader("Access-Control-Allow-Origin", "http://127.0.0.1:5501");
+  res.setHeader("Access-Control-Allow-Origin", "*");
   res.header(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
@@ -20,8 +20,8 @@ app.use((req, res, next) => { //---------------------------------------> dealing
 
 // creating configuration for openai object
 const config=new openai.Configuration({
-  organization:'organization-id',
-  apiKey:'api-key' 
+  organization:'Lex-organiozation-id',
+  apiKey:'api-key' // Samsung/M51-k2
 });
 
 
@@ -64,12 +64,12 @@ app.post('/mail',async(req,res)=>{
     let subject=req.body.subject;
     let message=req.body.message;
     let transporter = nodemailer.createTransport({
-      host: "smtp.gmail.com", // SMTP server address (usually mail.your-domain.com)
+      host: "smtp.gmail.com", // SMTP server address (usually mail.domain.com)
       port: 465, // Port for SMTP (usually 465)
       secure: true, // Usually true if connecting to port 465
       auth: {
-        user: "xyz@gmail.com", // Lexicon email address
-        pass: "abc123", // Password (for gmail, use app password)
+        user: "xyz@gmail.com", // Lexicon email address. Values here won't work, these are just dummy values
+        pass: "abc123", // Password (for gmail, use app password). Values here won't work, these are just dummy values
         // For better security, use environment variables set on the server for these values when deploying
       },
     });
@@ -78,7 +78,7 @@ app.post('/mail',async(req,res)=>{
 })
 async function sendMail(transporter, mailID, subject, message){
   let info = await transporter.sendMail({
-    from: 'zyz@gmail.com',
+    from: 'xyzg@gmail.com',
     to: mailID,
     subject: subject,
     html: `

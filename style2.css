@@ -107,6 +107,11 @@ body{
     width: 100px;
     height: 100px;
   }
+h3{
+    color: #fff;
+    margin-left: 20%;
+    padding-bottom: 30px;
+}
 .QuizTime{
     border: 2px solid white;
     border-radius: 15px 50px 30px;
@@ -114,7 +119,7 @@ body{
     padding-left: 35px;
     margin-left: 30%;
 }
-h6{
+h1{
     /*padding-left: 28%;*/
     font-size: 120px;
     line-height: 140px;
