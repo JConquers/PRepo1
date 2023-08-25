@@ -19,39 +19,6 @@ let isPaused;
 let mailid = ''; // to be retrieved from session storage
 let msg = ''; // Contains name, score, answer script
 
-
-/*async function getQuiz(prompt) {
-    const al=sessionStorage.getItem('fetchedQuiz');
-    alert(al)
-    //const dataFromUser=require('./prompt1Collect');
-    //const prompt=dataFromUser.prompt;
-    // Construct the URL for the /answer path
-    const url = 'http://localhost:3000/answer';
-  
-    // Use fetch to send the request and get the response
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ prompt: prompt }),
-    });
-  
-    // Check if the response is successful
-    if (response.ok) {
-      // Get the text from the response
-      quiz = await response.text();
-  
-      // Log the text to the console
-      //console.log(text);
-    } else {
-      // Log the error to the console
-      console.error(`Error: ${response.status}`);
-    }
-    buildQuestions();
-  }
-*/
-
 function buildQuestions() {
     alert("Preparing quiz");
     //quiz = sessionStorage.getItem('fetchedQuiz');
