@@ -1,0 +1,152 @@
+/* Style sheet for prompt1.css*/
+*{
+    margin: 0;
+    padding: 0;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+body{
+    background: linear-gradient(rgba(5, 0, 0, 0.5), rgba(5,0,136,0.5)), url('Images/AntwerpLib.jpg');
+    /*background: linear-gradient(to bottom right,rgba(0, 0, 255, 0.478),magenta);*/
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+    /*background: linear-gradient(to bottom right, magenta, cyan);
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;*/
+}
+
+#topic{
+    font-weight: 800;
+    margin-top: 10%;
+    margin-left: 25%;
+    color: solidbluevioletk;
+    width: 350px;
+    height: 35px;
+    background-color: white;
+    border: 3px solid blueviolet;
+    border-radius: 35px;
+    text-align: center;
+    opacity: 1;
+    /*font-style: oblique;*/
+}
+#noqs{
+    font-weight: 800;
+    color: solid blueviolet;
+    width: 200px;
+    height: 35px;
+    background-color: white;
+    border: 3px solid blueviolet;
+    border-radius: 35px;
+    text-align: center;
+    opacity: 1;
+    /*font-style: oblique;*/
+}
+#grd{
+    font-weight: 800;
+    color: solid blueviolet;
+    width: 100px;
+    height: 35px;
+    background-color: white;
+    border: 3px solid blueviolet;
+    border-radius: 35px;
+    text-align: center;
+    opacity: 1;
+    /*font-style: oblique;*/
+}
+#time{
+    font-weight: 800;
+    color: solid blueviolet;
+    width: 100px;
+    height: 35px;
+    background-color: white;
+    border: 3px solid blueviolet;
+    border-radius: 35px;
+    text-align: center;
+    opacity: 1;
+}
+
+.btn{
+    width: 40px;
+    height: 35px;
+    background-color: black;
+    color: blueviolet;
+    border: 3px solid blueviolet;
+    border-radius: 10px;
+    cursor: pointer;
+    transition-duration:0.2s;
+}
+.btn:hover{
+    border-color: black;
+    color: black;
+    background-color: #fff;
+}
+.logo{
+    display: flex;
+    align-items: center;
+    font-size: 40px;
+    font-weight: 600;
+    font-family: "Lucida Console", "Courier New", monospace;
+    color: #fff;
+    padding: 18px 8%;
+}
+.logo #x{
+    font-size: 45px;
+    color: blueviolet;
+}
+.logo img{
+    width: 60px;
+    margin-right: 10px;
+}
+#r1 {
+    border-radius: 15px 50px 30px;
+    background: blueviolet;
+    padding: 2px;
+    width: 100px;
+    height: 100px;
+  }
+.QuizTime{
+    border: 2px solid white;
+    border-radius: 15px 50px 30px;
+    width: 45%;
+    padding-left: 35px;
+    margin-left: 30%;
+}
+h6{
+    /*padding-left: 28%;*/
+    font-size: 120px;
+    line-height: 140px;
+    font-weight: 600;
+    -webkit-text-stroke: 2px #fff;
+    color: transparent;
+    background: url("Images/back.png");
+    background-clip: text;
+    -webkit-background-clip: text;
+    background-position: 0 0;
+    animation: back 20s linear infinite;
+}
+
+@keyframes back {
+    100%{
+        background-position: 2000px 0;
+    }
+}
+
+#spinner{
+    height: 120px;
+    width: 120px;
+    border: 8px solid;
+    border-color: white transparent white transparent;
+    border-radius: 50%;
+    animation: spin 1.3s linear infinite;
+    margin-left: 50%;
+    display: none;
+  }
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }

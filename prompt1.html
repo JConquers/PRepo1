@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--Prompt page that asks Topic, no. of Questions, Minutes, Level-->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lex-QuizMake</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="style2.css">
+</head>
+
+<body>
+    <div class="logo">
+        <img id="r1" src="Images/Logo1.jpg" height="75">
+        <p> .le<span id="x">X</span>icon </p>
+    </div>
+
+    <div class="QuizTime">
+        <h6>QuizTime!</h6>
+    </div>
+
+    <input type="text" placeholder="What would you like to test yourself on?" id="topic">
+    <input type="text" placeholder="How many questions?" id="noqs">
+    <input type="text" placeholder="Grade?" id="grd">
+    <input type="text" placeholder="Minutes?" id="time">
+    <button onclick="callLexServer()" class="btn">>>></button>
+    <br><br><br>
+    <div id="spinner"></div>
+    <script src="prompt1Script.js"></script>
+
+</body>
+
+</html>
