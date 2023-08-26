@@ -39,15 +39,15 @@ object={
 I presume this to be a lot more complex to understand than others. Let us go in a sequence.
 The quiz has been fetched and control is redirected to  quizPage.html from prompt1.html. Along with the quiz, the prompt1Script.js also passes a variable 'playQuiz' with a value 1, whose importance shall be shortly realised.
 
-> 'main()'is called inside quizPageScript.js. 
-> playQuiz being set to 1, 'buildQuestions()' is called which initialises global variables and also initialises 'questions[]' array from the string 'quiz' and at last it invokes 'startQuiz()'. 
-> startQuiz() sets up the Header section in layout by setting up the topic, question pallete and timer.
-> On click of any option, 'checkAnswer()' is called which matches the selected option with correct value and accordingly sets the attempt[], correct[] and selectedOption in questions[] for that question.
-> 'showQuiz()' displays the question text with options, keeping in mind which options and buttons have to be highlighted.
-> 'resetOptions()' resets the state of buttons when user navigates to a new question.
-> 'nxtQuestion()', 'prevQuestion()', 'clearOptions()', 'pauseResume()', 'mark()', etc all have their roles inferable from their names.
-> 'finQuiz()' is invoked when timer runs out or user forcefully end squiz by clicking Finish Quiz. For the first time this function is invoked by passing 1 as parameter. On the line 1 of this function playQuiz in session storage is set to 0. Accuracy, time taken is computed and question paper is readied fro download in .txt format. Option to share report is also available of which only sharing by gmail is enabled as of now. User can also revisit the quiz, this time no timer shall be switched on.
-> Now here comes the role of playQuiz. When the user is on 'revisitQuiz.html' and clicks the back option in browser's top bar, the control will go to quizScript.html and main() shall be invoked. Now the playQuiz is set to 0 so directly finQuiz() will be called and quiz would not be restarted again. 
+i. 'main()'is called inside quizPageScript.js. 
+ii. playQuiz being set to 1, 'buildQuestions()' is called which initialises global variables and also initialises 'questions[]' array from the string 'quiz' and at last it invokes 'startQuiz()'. 
+iii. startQuiz() sets up the Header section in layout by setting up the topic, question pallete and timer.
+iv. On click of any option, 'checkAnswer()' is called which matches the selected option with correct value and accordingly sets the attempt[], correct[] and selectedOption in questions[] for that question.
+v. 'showQuiz()' displays the question text with options, keeping in mind which options and buttons have to be highlighted.
+vi. 'resetOptions()' resets the state of buttons when user navigates to a new question.
+vii. 'nxtQuestion()', 'prevQuestion()', 'clearOptions()', 'pauseResume()', 'mark()', etc all have their roles inferable from their names.
+viii. 'finQuiz()' is invoked when timer runs out or user forcefully end squiz by clicking Finish Quiz. For the first time this function is invoked by passing 1 as parameter. On the line 1 of this function playQuiz in session storage is set to 0. Accuracy, time taken is computed and question paper is readied fro download in .txt format. Option to share report is also available of which only sharing by gmail is enabled as of now. User can also revisit the quiz, this time no timer shall be switched on.
+ix. Now here comes the role of playQuiz. When the user is on 'revisitQuiz.html' and clicks the back option in browser's top bar, the control will go to quizScript.html and main() shall be invoked. Now the playQuiz is set to 0 so directly finQuiz() will be called and quiz would not be restarted again. 
 
 Difficulties encountered:
 
