@@ -16,11 +16,38 @@ The above picture gives a good idea of the control flow through this project. In
 
 ![20230826_152723](https://github.com/JConquers/PRepo1/assets/112703837/c53731e1-615f-42ab-be32-68accc3ec625)
 
-Buttons in the navigation bar and header are self-explanatory and their purpose can easily be inferred by those who have taken at least one interactive quiz in their life (so those who attempted JEE/NEET can understand it even in first glance :) ). When an option is selected, it becomes shaded. The user can finish the quiz anytime by clicking on finish quiz or the quiz will end on its own once the timer ends. The layout will be formatted on the same page and in the question bar the user shall be able to see how many questions did he attempt, how many went correct, his accuracy, time taken. Also there are 2 buttons in the same section: Revisit answers and Download Script. On clicking the former the user shall be directed to a new page revisitQuiz.html where he can navigate through quiz just like before and see the distinction between his choice and correct answer (user’s choice is shown shaded and correct answer is shown with a green border). On clicking the later button, a copy of the question paper will be downloaded on user’s device for future references. Also the user can mail the report to himself by clicking on the mail icon
+Buttons in the navigation bar and header are self-explanatory and their purpose can easily be inferred by those who have taken at least one interactive quiz in their life (so those who attempted JEE/NEET can understand it even in first glance :) ). When an option is selected, it becomes shaded. The user can finish the quiz anytime by clicking on finish quiz or it will end on its own once the timer ends. The layout will be formatted on the same page and in the question bar the user shall be able to see how many questions did he attempt, how many went correct, his accuracy, time taken. Also there are 2 buttons in the same section: Revisit answers and Download Script. On clicking the former the user shall be directed to a new page revisitQuiz.html where he can navigate through quiz just like before and see the distinction between his choice and correct answer (user’s choice is shown shaded and correct answer is shown with a green border). On clicking the later button, a copy of the question paper will be downloaded on user’s device for future references. Also the user can mail the report to himself by clicking on the mail icon
 
 Question based process like keeping track of selected option, correct option, status of being marked/unmarked is handled by an array ‘questions’ where each item is an object containing, questions, answers (again an array of 4 items where each item is an object containing option label and correctness value), correct option, selected option and isMarked. This array is prepared from the quiz string retrieved from session storage.
 
 LexServer.cjs, built using express framework runs on port 3000 and has two post methods, one at URL: …/answer and another at URL: …/mail. First one is used to fetch quiz using OpenAI’s API and second one uses nodemailer to send mail. app.post(‘/answer’…) works by using an already configured OpenAI object (configured using org. id and api key) and app.post(‘/mail’…) creates a node mailer transporter object (can be configured using org. mailId and app password) to send the mail.
+
+Explainig the functions in quizPageScript.js:
+
+Understanding the structre of questions[] is important. Every item in questions[] is an object.
+object={
+    "questions"=question text,
+    "correctOption"=0-based index of correct option,
+    "selectedOption"= 0-based index of selected option, -1 incase none is selected.
+    "answers"=[
+        {"text"=option label, "correct"=true/false},
+        {"text"=option label, "correct"=true/false},
+        {"text"=option label, "correct"=true/false},
+        {"text"=option label, "correct"=true/false}
+    ]
+} 
+I presume this to be a lot more complex to understand than others. Let us go in a sequence.
+The quiz has been fetched and control is redirected to  quizPage.html from prompt1.html. Along with the quiz, the prompt1Script.js also passes a variable 'playQuiz' with a value 1, whose importance shall be shortly realised.
+
+> 'main()'is called inside quizPageScript.js. 
+> playQuiz being set to 1, 'buildQuestions()' is called which initialises global variables and also initialises 'questions[]' array from the string 'quiz' and at last it invokes 'startQuiz()'. 
+> startQuiz() sets up the Header section in layout by setting up the topic, question pallete and timer.
+> On click of any option, 'checkAnswer()' is called which matches the selected option with correct value and accordingly sets the attempt[], correct[] and selectedOption in questions[] for that question.
+> 'showQuiz()' displays the question text with options, keeping in mind which options and buttons have to be highlighted.
+> 'resetOptions()' resets the state of buttons when user navigates to a new question.
+> 'nxtQuestion()', 'prevQuestion()', 'clearOptions()', 'pauseResume()', 'mark()', etc all have their roles inferable from their names.
+> 'finQuiz()' is invoked when timer runs out or user forcefully end squiz by clicking Finish Quiz. For the first time this function is invoked by passing 1 as parameter. On the line 1 of this function playQuiz in session storage is set to 0. Accuracy, time taken is computed and question paper is readied fro download in .txt format. Option to share report is also available of which only sharing by gmail is enabled as of now. User can also revisit the quiz, this time no timer shall be switched on.
+> Now here comes the role of playQuiz. When the user is on 'revisitQuiz.html' and clicks the back option in browser's top bar, the control will go to quizScript.html and main() shall be invoked. Now the playQuiz is set to 0 so directly finQuiz() will be called and quiz would not be restarted again. 
 
 Difficulties encountered:
 
@@ -32,5 +59,5 @@ Lastly, the struggles of understanding git as a beginner. A million thanks to al
 
 Project Goals:
 
-Constrained by deadline; I could not take this project to what I had anticipated, but that doesn’t mean I leave hopes and stop making efforts. Here is what I am trying to take it to: User oriented-account based service where user creates his account wherein he specifies his mailID, twitter and instagram handles (obviously optional) and other such things. Next time the user logs in to his account he would be able to see his past quizzes and progress. Another feature I want to add is that user can specify his exam dates in advance, then based on the topic Lexicon will create and schedule a set of quizzes based on that topic and as per the schedule the user will receive a reminder mail one day prior to the quizzes. This way the user can prepare better for his exams. Another thing I am working on is to find efficient algorithms to create the ‘questions’ array by parsing the quiz string because at present it is not able to handle those cases when a code snippet needs to be displayed. Currently it is using gpt-3/3.5 model of OpenAI whose results are sometimes inconsistent with the standard of questions. This can be solved by using gpt-4 or as OpenAI improves its models.
+Constrained by deadline; I could not take this project to what I had anticipated, but that doesn’t mean I leave hopes and stop making efforts. Here is what I am trying to take it to: User oriented-account based service where user creates his account wherein he specifies his mailID, twitter and instagram handles (obviously optional) and other such things. This explains the existence of buttons on prompt0.html which are inactive right now like 'Login','Signup',etc. Next time the user logs in to his account he would be able to see his past quizzes and progress. Another feature I want to add is that user can specify his exam dates in advance, then based on the topic Lexicon will create and schedule a set of quizzes based on that topic and as per the schedule the user will receive a reminder mail one day prior to the quizzes. This way the user can prepare better for his exams. Another thing I am working on is to find efficient algorithms to create the ‘questions’ array by parsing the quiz string so that question text, answer options and correct answer can be segregated regardless of the format in which quiz is received. Currently it is using gpt-3/3.5 model of OpenAI whose results are sometimes inconsistent with the standard of questions. This can be solved by using gpt-4 or as OpenAI improves its models.
    	

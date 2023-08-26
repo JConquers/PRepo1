@@ -345,7 +345,7 @@ function showQuestion() {
     if (questions[currrentQuestionIndex].isMarked) { // reflect the state of being marked
         document.getElementById('mark').style.backgroundColor = 'black';
         document.getElementById('mark').style.color = 'white';
-        document.getElementById('mark').innerHTML = 'Marked';
+        document.getElementById('mark').innerHTML = 'Unmark';
     }
     else{
         document.getElementById('mark').style.backgroundColor = 'white';
@@ -447,7 +447,7 @@ function markForLater() {
         //Reflect change in marked button
         markButton.style.backgroundColor = 'black';
         markButton.style.color = 'white';
-        markButton.innerHTML = 'Marked';
+        markButton.innerHTML = 'Unmark';
         questions[currrentQuestionIndex].isMarked = true;
     }
     else{
