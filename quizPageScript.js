@@ -415,6 +415,7 @@ function pauseResume() {
 function sendByMail() {
     mailid = sessionStorage.getItem('mailID');
     msg=sessionStorage.getItem('msg');
+    msg = msg.replace(/\n/g, '<br>');
 
     var xhr = new XMLHttpRequest();// Create a new XMLHttpRequest object
     xhr.open("POST", "http://localhost:3000/mail/");
