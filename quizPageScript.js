@@ -1,6 +1,8 @@
 //let quiz = "1) Which gland is known as the master gland?\n\na) Thyroid gland\nb) Adrenal gland\nc) Pituitary gland\nd) Pancreas\n\nAnswer: c) Pituitary gland\n\n2) Which hormone is responsible for regulating blood sugar levels?\n\na) Insulin\nb) Estrogen\nc) Testosterone\nd) Growth hormone\n\nAnswer: a) Insulin\n\n3) Which gland is responsible for controlling the body's metabolism?\n\na) Thyroid gland\nb) Pineal gland\nc) Parathyroid gland\nd) Ovaries\n\nAnswer: a) Thyroid gland";
-let QuestionScript = ''; // data that will be downloaded as .txt file
+//let quiz='1) The magnitude of a vector is always:\na) Positive\nb) Negative\nc) Zero\nd) Variable\n\nAnswer: a) Positive\n\n2) The sum of two collinear vectors is always:\na) Collinear\nb) Perpendicular\nc) Coplanar\nd) Anti-parallel\n\nAnswer: a) Collinear\n\n3) The unit vector parallel to the x-axis is:\na) i\nb) j\nc) k\nd) 1\n\nAnswer: a) i\n\n4) The magnitude of a vector in terms of its components is given by:\na) acosθ\nb) asinθ\nc) √(a^2 + b^2)\nd) a + b\n\nAnswer: c) √(a^2 + b^2)\n\n5) The cross product of two parallel vectors is always:\na) Parallel\nb) Perpendicular\nc) Anti-parallel\nd) Zero\n\nAnswer: d) Zero';
+//let quiz='1. Which of the following is NOT a valid data type in C++?\na) int\nb) bool\nc) float\nd) char\nAnswer: b) bool\n\n2. What is the output of the following code snippet?\n\n```cpp\n#include <iostream>\nusing namespace std;\n\nint main() {\n    int x = 5;\n    cout << x << endl;\n    return 0;\n}\n```\na) 0\nb) 5\nc) Error\nd) Undefined\nAnswer: b) 5';
 let quiz = '';
+let QuestionScript = ''; // data that will be downloaded as .txt file
 let questions = []; //Data structure to hold objects containing question, answer options, selected option and correct option 
 let time;
 let totalSecondsToCountDown = 0;
@@ -29,14 +31,66 @@ function buildQuestions() {
     isPaused = false;
     totalSecondsToCountDown = time * 60;
 
+    // questions[] is built for all cases except when left margin for options is not 0
     let parserIndex = 0;
+    for (let i = 0; i < noqs; i++) {
+        let questionObject = {};
+        questionObject.question='';
+
+        parserIndex = quiz.indexOf(' ') + 1;
+        let endParser=quiz.indexOf('\n');
+        do{
+            questionObject.question += (quiz.slice(parserIndex, endParser)+'<br>');
+            parserIndex = endParser + 1;
+            quiz = quiz.slice(parserIndex);
+            parserIndex=0;
+            endParser = quiz.indexOf('\n');
+        }while(quiz[parserIndex]!='a' || quiz[parserIndex+1]!='\)' || quiz[parserIndex+2]!=' ');
+
+        let answers = [];
+
+        for (let j = 0; j < 4; j++) {
+            let optionObject = {}; // option + correctness i.e. {text, correct}
+            let start = quiz.indexOf(' ') + 1; // to exclude label  in option
+            let txt = quiz.slice(start, quiz.indexOf('\n'));
+
+            optionObject.text = txt;
+            optionObject.correct = false;
+
+            parserIndex = quiz.indexOf('\n') + 1;
+            quiz = quiz.slice(parserIndex);
+
+            answers[j] = optionObject;
+        }
+        quiz = quiz.slice(1); // quiz now begins with "Answer: ....."
+        //console.log(quiz);
+        let correctAnswer = quiz.indexOf(':') + 2;
+        answers[quiz.charCodeAt(correctAnswer) - 'a'.charCodeAt(0)].correct = true;
+        questionObject.correctOption = quiz.charCodeAt(correctAnswer) - 'a'.charCodeAt(0); // 0-based index of correct option
+        console.log(answers);
+
+        //quiz=quiz.slice(correctAnswer);
+        parserIndex = quiz.indexOf('\n') + 2;
+        quiz = quiz.slice(parserIndex);
+        parserIndex = 0;
+
+        questionObject.answers = answers;
+        questionObject.selectedOption = -1;
+        questionObject.isMarked = false;
+
+        questions[i] = questionObject;
+    }
+    console.log(questions)
+    alert('INSTRUCTIONS:\nIn the question pallete:\nOrange: marked for later\nGreen: attempted\nYou cannot navigate the quiz when it is paused.\nQuiz will end automatically when timer ends')
+    startQuiz();
+    /*let parserIndex = 0;
     for (let i = 0; i < noqs; i++) {
         let questionObject = {};
 
         parserIndex = quiz.indexOf(' ') + 1;
-        questionObject.question = quiz.slice(parserIndex, quiz.indexOf('?') + 1);
+        questionObject.question = quiz.slice(parserIndex, quiz.indexOf(':') + 1);
 
-        parserIndex = quiz.indexOf('?') + 1 + 1 + 1;
+        parserIndex = quiz.indexOf(':') + 1 + 1 + 1;
         quiz = quiz.slice(parserIndex);
 
         let answers = [];
@@ -73,7 +127,8 @@ function buildQuestions() {
         questions[i] = questionObject;
     }
     alert('INSTRUCTIONS:\nIn the question pallete:\nOrange: marked for later\nGreen: attempted\nYou cannot navigate the quiz when it is paused.\nQuiz will end automatically when timer ends')
-    startQuiz();
+    startQuiz();*/
+
 }
 function startQuiz() {
     currrentQuestionIndex = 0;

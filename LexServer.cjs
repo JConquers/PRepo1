@@ -54,27 +54,23 @@ app.post('/answer', async (req, res) => {
   }
 });
 
-/*app.get('/answer',(req,res)=>{
-  res.send('Just to check working of server')
-})*/
-
 app.post('/mail',async(req,res)=>{
-    // First, define send settings by creating a new transporter: 
-    let mailID=req.body.mailID;
-    let subject=req.body.subject;
-    let message=req.body.message;
-    let transporter = nodemailer.createTransport({
-      host: "smtp.gmail.com", // SMTP server address (usually mail.domain.com)
-      port: 465, // Port for SMTP (usually 465)
-      secure: true, // Usually true if connecting to port 465
-      auth: {
-        user: "xyz@gmail.com", // Lexicon email address. Values here won't work, these are just dummy values
-        pass: "abc123", // Password (for gmail, use app password). Values here won't work, these are just dummy values
-        // For better security, use environment variables set on the server for these values when deploying
-      },
-    });
-    sendMail(transporter, mailID, subject, message);
-    res.send('done dana done')
+  // First, define send settings by creating a new transporter: 
+  let mailID=req.body.mailID;
+  let subject=req.body.subject;
+  let message=req.body.message;
+  let transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com", // SMTP server address (usually mail.domain.com), here I've written gmail's
+    port: 465, // Port for SMTP (usually 465)
+    secure: true, // Usually true if connecting to port 465
+    auth: {
+      user: "xyz@gmail.com", // Lexicon email address. Values here won't work, these are just dummy values
+      pass: "abc123", // Password (for gmail, use app password). Values here won't work, these are just dummy values
+      // For better security, use environment variables set on the server for these values when deploying
+    },
+  });
+  sendMail(transporter, mailID, subject, message);
+  res.send('done dana done')
 })
 async function sendMail(transporter, mailID, subject, message){
   let info = await transporter.sendMail({
@@ -87,7 +83,10 @@ async function sendMail(transporter, mailID, subject, message){
   });
   console.log(info.messageId); // Random ID generated after successful send (optional)
 }
-
-app.listen(3000, () => {
+/*app.get('/answer',(req,res)=>{
+  res.send('Just to check working of server')
+})*/
+  
+  app.listen(3000, () => {
   console.log('Server is running on port 3000.');
 });

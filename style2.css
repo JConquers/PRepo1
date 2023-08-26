@@ -1,7 +1,8 @@
-/* Style sheet for prompt1.css*/
+/* Style sheet for prompt1.html*/
 *{
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
     font-family: "Lucida Console", "Courier New", monospace;
 }
 body{
@@ -107,11 +108,7 @@ body{
     width: 100px;
     height: 100px;
   }
-h3{
-    color: #fff;
-    margin-left: 20%;
-    padding-bottom: 30px;
-}
+
 .QuizTime{
     border: 2px solid white;
     border-radius: 15px 50px 30px;
@@ -140,10 +137,10 @@ h1{
 }
 
 #spinner{
-    height: 120px;
-    width: 120px;
+    height: 100px;
+    width: 100px;
     border: 8px solid;
-    border-color: white transparent white transparent;
+    border-color: white blueviolet white blueviolet;
     border-radius: 50%;
     animation: spin 1.3s linear infinite;
     margin-left: 50%;
