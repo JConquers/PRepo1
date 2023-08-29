@@ -10,11 +10,13 @@ Technical details:
 
 There are several files in this repo. Here I shall explain them stepwise. Take a look at this picture:
 
-![20230826_151209](https://github.com/JConquers/PRepo1/assets/112703837/3eb5989d-df7b-452b-8cb0-2ac47e47da48)
+
+![20230826_151209](https://github.com/JConquers/PRepo1/assets/112703837/c6be1949-a308-405a-88f2-b29c5a1e21b3)
 
 The above picture gives a good idea of the control flow through this project. In prompt0.html, user enters his name and email id. Going on to next page i.e. prompt1.html, user enters his topic, number of questions, grade and time. Clicking on ‘generate quiz’ button, a spinner starts on the same page while the quiz is being fetched from Lex-Server.cjs with a POST request that contains a prompt. Once the quiz is fetched in form of a string, the quiz along with topic, time, grade, no. of questions and email ID is passed into the session storage and control is directed to the next page quizPage.html which has the following layout:
 
-![20230826_152723](https://github.com/JConquers/PRepo1/assets/112703837/c53731e1-615f-42ab-be32-68accc3ec625)
+![20230826_152723](https://github.com/JConquers/PRepo1/assets/112703837/4574d7f5-e29c-4d48-9e05-04115272c788)
+
 
 Buttons in the navigation bar and header are self-explanatory and their purpose can easily be inferred by those who have taken at least one interactive quiz in their life (so those who attempted JEE/NEET can understand it even in first glance :) ). When an option is selected, it becomes shaded. The user can finish the quiz anytime by clicking on finish quiz or it will end on its own once the timer ends. The layout will be formatted on the same page and in the question bar the user shall be able to see how many questions did he attempt, how many went correct, his accuracy, time taken. Also there are 2 buttons in the same section: Revisit answers and Download Script. On clicking the former the user shall be directed to a new page revisitQuiz.html where he can navigate through quiz just like before and see the distinction between his choice and correct answer (user’s choice is shown shaded and correct answer is shown with a green border). On clicking the later button, a copy of the question paper will be downloaded on user’s device for future references. Also the user can mail the report to himself by clicking on the mail icon
 
@@ -64,6 +66,10 @@ I spent a lot of time figuring out how to run a node js file in browser. I was c
 Secondly, each time I tried to access LexServer.cjs it threw an error ‘Acess-Control-Allow-Origin: header absent’. Thanks to the Computer Networks course that we had recently, I could understand the meaning of such errors. After going through some online resources, I could finally correct that error.
 
 Lastly, the struggles of understanding git as a beginner. A million thanks to all those amazing seniors and online resources/tutorial contributors who guided me through this project.
+
+How to run?:
+
+First run the server LexServer.cjs file, it shall run on port 3000. Then just open the prompt0.html file and proceed.
 
 Project Goals:
 
